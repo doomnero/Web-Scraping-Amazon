@@ -66,7 +66,7 @@ user_agent_list = [
 ]
 while True:
     try:
-        way = input('Iniciando pesquisa de livros na amazon!\nFavor inserir caminho para a pasta onde se encontra o arquivo base:')
+        way = input('Iniciando pesquisa de livros na amazon!\nFavor inserir caminho para a pasta onde se encontra o arquivo base: ')
         book = pd.read_excel(f'{way}\AMAZON_BASE_PESQUISA_AUTOMATICA.xlsx')
         print('Arquivo lido, iniciando pesquisa, favor aguardar mensagem de término para fechar o programa.')
         break
@@ -136,17 +136,16 @@ for isbn in isbn_list:
             price = hash
             excel_dict[f'{isbn}'] = price
 
-date_now = datetime.datetime.now()
-str_date_now = str(date_now)
-clean_date_now = re.sub("\:","-",str_date_now)
-super_clean_str_date_now = re.sub("\ ","_",clean_date_now)
-final_date_now = super_clean_str_date_now[:-10]
-
 df = pd.DataFrame(data=excel_dict, index=[0])
 df = (df.T)
 while True:
     try:
         excel_local = input('Favor inserir caminho para a pasta onde o arquivo será gerado: ')
+        date_now = datetime.datetime.now()
+        str_date_now = str(date_now)
+        clean_date_now = re.sub("\:","-",str_date_now)
+        super_clean_str_date_now = re.sub("\ ","_",clean_date_now)
+        final_date_now = super_clean_str_date_now[:-10]
         df.to_excel(f'{excel_local}\PRECOS_AMAZON_{final_date_now}.xlsx')
         break
     except:
